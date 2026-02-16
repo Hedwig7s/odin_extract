@@ -3,7 +3,7 @@ import "core:bufio"
 import "core:encoding/json"
 import "core:fmt"
 import "core:mem/virtual"
-import os "core:os/os2"
+import "core:os"
 import "core:path/filepath"
 import "core:strconv"
 import "core:strings"
@@ -53,7 +53,8 @@ extract :: proc(
 	defer os.close(outf)
 
 	writer: bufio.Writer
-	bufio.writer_init(&writer, outf.stream)
+
+	bufio.writer_init(&writer, os.to_stream(outf))
 	defer bufio.writer_flush(&writer)
 
 	fmt.print("\r", flush = false)
