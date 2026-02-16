@@ -1,3 +1,4 @@
+#+feature using-stmt
 package nobuild
 import "base:intrinsics"
 import "base:runtime"
