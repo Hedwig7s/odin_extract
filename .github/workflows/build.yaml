@@ -51,6 +51,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: odin_extract-windows
-          path: |
-            odin_extract.exe
-            **/odin_extract.exe
+          path: odin_extract.exe
+
