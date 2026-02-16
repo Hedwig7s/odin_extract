@@ -21,8 +21,8 @@ jobs:
         uses: laytan/setup-odin@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          release: dev-2026-02
-
+          release: nightly
+          
       - name: Build (Linux)
         if: runner.os == 'Linux'
         run: |
