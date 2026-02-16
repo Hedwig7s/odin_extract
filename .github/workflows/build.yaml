@@ -25,6 +25,7 @@ jobs:
       - name: Build (Linux)
         if: runner.os == 'Linux'
         run: |
+          odin version
           chmod +x build.sh
           ./build.sh
 
