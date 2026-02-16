@@ -29,7 +29,9 @@ jobs:
           odin version
           chmod +x build.sh
           ./build.sh
-
+      - name: Setup MSVC (Windows)
+        if: runner.os == 'Windows'
+        uses: TheMrMilchmann/setup-msvc-dev@v4.0.0
       - name: Build (Windows)
         if: runner.os == 'Windows'
         shell: cmd
