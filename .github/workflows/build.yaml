@@ -1,0 +1,48 @@
+name: Build Odin Project
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Odin
+        uses: laytan/setup-odin@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          chmod +x build.sh
+          ./build.sh
+
+      - name: Build (Windows)
+        if: runner.os == 'Windows'
+        shell: cmd
+        run: build.bat
+
+      - name: Upload Linux Artifact
+        if: runner.os == 'Linux'
+        uses: actions/upload-artifact@v4
+        with:
+          name: odin_extract-linux
+          path: odin_extract
+
+      - name: Upload Windows Artifact
+        if: runner.os == 'Windows'
+        uses: actions/upload-artifact@v4
+        with:
+          name: odin_extract-windows
+          path: odin_extract.exe
